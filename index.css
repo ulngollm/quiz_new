@@ -1,0 +1,53 @@
+body {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.overlay {
+  overflow: hidden;
+}
+
+.quiz {
+  animation: fadeIn 0.2s;
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  background: rgba(0, 0, 0, 0.5);
+}
+.quiz__modal {
+  width: min-content;
+  position: relative;
+  align-self: center;
+}
+.quiz__close {
+  position: absolute;
+  right: -40px;
+  top: 0px;
+}
+.quiz_removed {
+  animation: fadeOut 0.2s;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/*# sourceMappingURL=index.css.map */

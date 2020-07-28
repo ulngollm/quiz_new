@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+$accentColor: #0075FF;
+$transition: 0.15s ease-in-out;
+$bigTransition: 0.2s ease-in-out;
+$lightGrey: #D4D8DB;
+*{
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+body{
+    background: #808080;
+    color: #2D2D2D;
+    margin: 0;
+}
+.container{
+    width: 1200px;
+    margin: 0 auto;
+    // display: flex;
+    // flex-direction: column;
+    // align-items: center;
+}

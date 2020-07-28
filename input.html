@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="input.css">
+    <script defer src="quiz.js"></script>
+    <script src="str.js"></script>
+</head>
+
+<body>
+    
+    <div class="form">
+        <div class="form__header">
+            Какой у вас вид ?
+        </div>
+        <form class="form__body">
+        </form>
+        <div class="form__footer">
+            <div class="message message_warning form__error">🚔 Виу виу, кажется, вы что-то забыли выбрать.. </div>
+            <div class="form__nav">
+                <a href="#" class="button form__button form__button_prev">Назад</a>
+                <a href="#" class="button form__button form__button_next">Далее</a>
+            </div>
+        </div>
+    </div>
+    <div class="form form_hidden">
+        <div class="form__header">
+            Спасибо! 👏
+        </div>
+        <div class="form__body form__body_result">
+            <div class="message form__message">
+                Благодарим за ответы!<br>
+                Мы свяжемся с вами в ближайшее время.
+            </div>
+            <form class="form__feedback" action="" method="POST">
+                <label class="label form__label"> <span class="label__text">Введите телефон</span>
+                    <input type="text" name="phone" class="input input_icon input_icon-phone"
+                        placeholder="+7 (___) ___-__-__" required>
+                </label>
+                <label class="label form__label"><span class="label__text">Введите имя</span>
+                    <input type="text" name="name" class="input input_icon input_icon-name" placeholder="Имя" required>
+                </label>
+                <label class="label form__label"><span class="label__text">Введите e-mail</span>
+                    <input type="text" name="mail" class="input input_icon input_icon-mail" placeholder="email@email.ru"
+                        required>
+                </label>
+                <input class="button form__button form__button_submit" type="submit" value="Получить предложение">
+                <label class="control">
+                    <input type="checkbox" class="control__input" required>
+                    <span class="control__label control__label_checkbox control__label_privacy">С <a class="link"
+                            href="https://noknok.ru/privacy">политикой конфиденциальности</a> ознакомлен(а)</span>
+                </label>
+            </form>
+        </div>
+</body>
+
+</html>
+
