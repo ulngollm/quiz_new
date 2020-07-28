@@ -8,7 +8,7 @@ $data = json_decode($json);
 // print_r($data);
 
 $to = 'ul@noknok.ru';
-$subject = "Новый квиз":
+$subject = "Новый квиз";
 $from = "From: info@noknok.ru";
 $message = '';
 foreach ($data as $key) {
@@ -16,5 +16,5 @@ foreach ($data as $key) {
 }
 
 $sendMail = mail($to,$subject, $message, $from);
-echo = $sendMail? 'Успешно':"Ошибка"; 
+echo $sendMail? 'Успешно':"Ошибка"; 
     
