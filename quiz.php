@@ -3,8 +3,9 @@ ini_set('error_reporting','On');
 error_reporting(E_ALL);
 
 $json = file_get_contents("php://input");
-
+$json = strip_tags($json);
 $data = json_decode($json);
+
 // print_r($data);
 
 $to = 'ul@noknok.ru';
