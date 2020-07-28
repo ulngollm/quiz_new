@@ -9,12 +9,14 @@ $data = json_decode($json);
 
 $to = 'ul@noknok.ru';
 $subject = "Новый квиз";
-$from = "From: info@noknok.ru";
+$headers  = 'MIME-Version: 1.0' . "\r\n";
+$headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
+$headers .= "From: info@noknok.ru\r\n";
 $message = '';
 foreach ($data as $key) {
     $message .= "<p><b>$key->question</b> $key->answer</p>";
 }
 
-$sendMail = mail($to,$subject, $message, $from);
+$sendMail = mail($to,$subject, $message, $headers);
 echo $sendMail? 'Успешно':"Ошибка"; 
     
