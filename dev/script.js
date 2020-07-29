@@ -78,7 +78,5 @@ class UserAnswer{
 let quiz = new Quiz(structure);
 quiz.initQuiz();
 
-document.querySelector('.form__button_next').addEventListener('click', ()=>quiz.nextStep());
+document.querySelector('.form__button_next').addEventListener('click', ()=>quiz.nextStep);
 document.querySelector('.form__button_prev').addEventListener('click', ()=>quiz.prevStep);
-
-
