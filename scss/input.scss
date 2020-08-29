@@ -154,25 +154,51 @@ $innerPadding:10px;
 
 .form{
     @extend %card;
-    @extend .container;
+    // @extend .container;
+    margin: 0 auto;
+    height: 100%;
     position: relative;
     background: white;
     max-width: 840px;
-    height: 500px;
+    // max-height: 500px;
     $padding:40px;
+
+    
+
     &__header{
         padding: 23px $padding 18px;
         border-bottom: 1px solid $lightGrey;
         font-size: 24px;
+        @media (max-width:600px){  
+            font-size: 22px;
+            padding-left: 22px;
+            padding-right: 22px;
+        }
     }
     &__body{
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         grid-gap: 30px 40px;
         padding:  60px $padding;
-        &_result{
-            padding: 24px 40px 31px;
+
+        @media (max-width:600px) {
+            grid-template-columns: 1fr;
+            padding: 22px;
         }
+
+        &_result{
+            grid-template-columns: 1fr 310px;
+            padding-top: 24px;
+            padding-bottom: 31px;
+            @media (max-width:600px){
+                grid-template-columns: 1fr;
+                grid-row-gap:20px;
+                padding-top: 20px;
+                padding-bottom: 20px;
+            }
+        }
+
+        
     }
     &__footer{
         position: absolute;
@@ -181,13 +207,22 @@ $innerPadding:10px;
         grid-template-columns: repeat(2, 1fr);
         grid-column-gap: 40px;
         padding: 0 $padding $padding;
+        @media (max-width:600px) {
+            grid-template-columns: 1fr;
+            grid-row-gap: 20px;
+            
+        }
     }
     &__nav{
         display: flex;
         justify-content: end;
+        @media (max-width:600px){
+            justify-content: space-between;
+            width: auto;
+        }
     }
     &__button{
-        flex: 0 0 150px;
+        flex: 0 1 150px;
         &_prev{
             background: transparent;
             color: #787878;
@@ -200,7 +235,6 @@ $innerPadding:10px;
     &__feedback{
         @extend %card;
         background: #F4F5F6;
-        width: 310px;
         padding: 20px;
         height: auto;
     }
@@ -208,7 +242,7 @@ $innerPadding:10px;
         margin-bottom: 18px;
     }
     &__message{
-        padding-top: 12px;
+        // padding-top: 12px;
     }
     &_hidden{
         display: none;
@@ -229,6 +263,10 @@ $innerPadding:10px;
 .message{
     font-size: 18px;
     line-height: 30px;
+    @media (max-width: 600px) {
+        font-size: 14px;
+        line-height: 20px;
+    }
 }
     
 :-moz-placeholder{

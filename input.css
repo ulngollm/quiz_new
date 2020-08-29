@@ -8,9 +8,10 @@ body {
   background: #808080;
   color: #2D2D2D;
   margin: 0;
+  height: 100vh;
 }
 
-.container, .form {
+.container {
   width: 1200px;
   margin: 0 auto;
 }
@@ -172,15 +173,23 @@ body {
 }
 
 .form {
+  margin: 0 auto;
+  height: 100%;
   position: relative;
   background: white;
   max-width: 840px;
-  height: 500px;
 }
 .form__header {
   padding: 23px 40px 18px;
   border-bottom: 1px solid #D4D8DB;
   font-size: 24px;
+}
+@media (max-width: 600px) {
+  .form__header {
+    font-size: 22px;
+    padding-left: 22px;
+    padding-right: 22px;
+  }
 }
 .form__body {
   display: grid;
@@ -188,8 +197,24 @@ body {
   grid-gap: 30px 40px;
   padding: 60px 40px;
 }
+@media (max-width: 600px) {
+  .form__body {
+    grid-template-columns: 1fr;
+    padding: 22px;
+  }
+}
 .form__body_result {
-  padding: 24px 40px 31px;
+  grid-template-columns: 1fr 310px;
+  padding-top: 24px;
+  padding-bottom: 31px;
+}
+@media (max-width: 600px) {
+  .form__body_result {
+    grid-template-columns: 1fr;
+    grid-row-gap: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
 }
 .form__footer {
   position: absolute;
@@ -199,12 +224,24 @@ body {
   grid-column-gap: 40px;
   padding: 0 40px 40px;
 }
+@media (max-width: 600px) {
+  .form__footer {
+    grid-template-columns: 1fr;
+    grid-row-gap: 20px;
+  }
+}
 .form__nav {
   display: flex;
   justify-content: end;
 }
+@media (max-width: 600px) {
+  .form__nav {
+    justify-content: space-between;
+    width: auto;
+  }
+}
 .form__button {
-  flex: 0 0 150px;
+  flex: 0 1 150px;
 }
 .form__button_prev {
   background: transparent;
@@ -216,15 +253,11 @@ body {
 }
 .form__feedback {
   background: #F4F5F6;
-  width: 310px;
   padding: 20px;
   height: auto;
 }
 .form__label {
   margin-bottom: 18px;
-}
-.form__message {
-  padding-top: 12px;
 }
 .form_hidden {
   display: none;
@@ -243,6 +276,12 @@ body {
 .message {
   font-size: 18px;
   line-height: 30px;
+}
+@media (max-width: 600px) {
+  .message {
+    font-size: 14px;
+    line-height: 20px;
+  }
 }
 
 :-moz-placeholder {
