@@ -51,6 +51,7 @@ $innerPadding:10px;
         display: block;
         padding-left: 28px;
         line-height: 20px;
+        margin-top: 10px;
         
 
         &_radio::before {
@@ -73,6 +74,7 @@ $innerPadding:10px;
         &_radio::before,
         &_radio::after {
             border-radius: 50%;
+            margin-top: inherit;
         }
         &_checkbox::before{
             @include input_before(15px, $lightGrey);
@@ -197,8 +199,13 @@ $innerPadding:10px;
                 padding-bottom: 20px;
             }
         }
-
-        
+        &_centered{
+            display: flex;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
     }
     &__footer{
         position: absolute;
@@ -241,9 +248,9 @@ $innerPadding:10px;
     &__label{
         margin-bottom: 18px;
     }
-    &__message{
-        // padding-top: 12px;
-    }
+    // &__message{
+    //     padding-top: 12px;
+    // }
     &_hidden{
         display: none;
     }
