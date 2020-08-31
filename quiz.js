@@ -46,11 +46,11 @@ function initQuiz() {
     document.querySelector('.form__header').innerText = step['question'];
     document.querySelector('.form__body').innerHTML = '';
     for (answer in step['answers']) {
-        let elem = `<label class="control"><input type="radio" class="control__input" name="choose" value="${answer}" required><span class="control__label control__label_radio">${answer}</span></label>`;
+        let elem = `<label class="control"><input type="radio" class="control__input" name="choose" value="${answer}" autocomplete="off" required><span class="control__label control__label_radio">${answer}</span></label>`;
         document.querySelector('.form__body').insertAdjacentHTML('beforeend', elem);
     }
     if (step['textField']) {
-        let input = '<label class="control"><input type="radio" class="control__input control__input_replacement" name="choose" value="" required><input class="input" type="text" name="other" placeholder="Другое"></label>';
+        let input = '<label class="control"><input type="radio" class="control__input control__input_replacement" name="choose" autocomplete="off" value="" required><input class="input" type="text" name="other" placeholder="Другое"></label>';
         document.querySelector('.form__body').insertAdjacentHTML('beforeend', input);
     }
 }
