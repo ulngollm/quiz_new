@@ -32,7 +32,7 @@ function addAnswer() {
 }
 
 function goFinalPage() {
-    document.querySelector('.form_answers').classList.add('form_hidden');
+    document.querySelector('.form_first').classList.add('form_hidden');
     document.querySelector('.form_result').classList.remove('form_hidden');
 }
 function showSuccessPage(){
@@ -44,19 +44,19 @@ function initQuiz() {
     showError(false)
     let step = quiz[currentStep];
     document.querySelector('.form__header').innerText = step['question'];
-    document.querySelector('.form__body').innerHTML = '';
+    document.querySelector('.form__answers').innerHTML = '';
     for (answer in step['answers']) {
         let elem = `<label class="control"><input type="radio" class="control__input" name="choose" value="${answer}" autocomplete="off" required><span class="control__label control__label_radio">${answer}</span></label>`;
-        document.querySelector('.form__body').insertAdjacentHTML('beforeend', elem);
+        document.querySelector('.form__answers').insertAdjacentHTML('beforeend', elem);
     }
     if (step['textField']) {
         let input = '<label class="control"><input type="radio" class="control__input control__input_replacement" name="choose" autocomplete="off" value="" required><input class="input" type="text" name="other" placeholder="Другое"></label>';
-        document.querySelector('.form__body').insertAdjacentHTML('beforeend', input);
+        document.querySelector('.form__answers').insertAdjacentHTML('beforeend', input);
     }
 }
 
 function checkValid(){
-    let hasAnswer = document.querySelector('form.form__body').checkValidity();
+    let hasAnswer = document.querySelector('form.form__answers').checkValidity();
     hasAnswer? showError(false): showError(true);
     return hasAnswer;
 }
@@ -97,7 +97,7 @@ document.querySelector('input[name="other"]').addEventListener('focus', function
 document.querySelector('input[name="other"]').addEventListener('input', function(e){
     document.querySelector('.control__input_replacement').value = e.currentTarget.value;
 })
-document.querySelector('form.form__body').addEventListener('change', checkValid);
+document.querySelector('form.form__answers').addEventListener('change', checkValid);
 
 var phoneMask = IMask(
     document.querySelector('.input_icon-phone'), {

@@ -164,9 +164,8 @@ $innerPadding:10px;
     max-width: 840px;
     // max-height: 500px;
     $padding:40px;
-
-    
-
+    display: flex;
+    flex-direction: column;
     &__header{
         padding: 23px $padding 18px;
         border-bottom: 1px solid $lightGrey;
@@ -178,6 +177,9 @@ $innerPadding:10px;
         }
     }
     &__body{
+        flex:1;
+    }
+    &__answers{
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         grid-gap: 30px 40px;
@@ -208,8 +210,8 @@ $innerPadding:10px;
         }
     }
     &__footer{
-        position: absolute;
-        bottom: 0;
+        // position: absolute;
+        // bottom: 0;
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         grid-column-gap: 40px;
