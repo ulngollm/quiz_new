@@ -129,6 +129,9 @@ body {
   line-height: 55px;
   font-size: 14px;
   width: 100%;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
   border: none;
   text-align: center;
   background: #0075FF;
@@ -176,7 +179,7 @@ body {
 
 .form {
   margin: 0 auto;
-  height: 100%;
+  min-height: 100%;
   position: relative;
   background: white;
   max-width: 840px;
@@ -231,6 +234,8 @@ body {
   text-align: center;
 }
 .form__footer {
+  /*position: absolute;
+  bottom: 0;*/
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-column-gap: 40px;
