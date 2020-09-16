@@ -205,6 +205,12 @@ body {
   flex: 1;
   padding: 60px 40px;
 }
+@media (max-width: 600px) {
+  .form__body {
+    padding: 22px;
+    flex: 0;
+  }
+}
 .form__body_result {
   display: grid;
   grid-template-columns: 1fr 310px;
@@ -234,7 +240,6 @@ body {
 @media (max-width: 600px) {
   .form__answers {
     grid-template-columns: 1fr;
-    padding: 22px;
   }
 }
 .form__footer {

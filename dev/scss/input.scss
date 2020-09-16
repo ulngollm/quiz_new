@@ -182,6 +182,10 @@ $innerPadding:10px;
     &__body{
         flex:1;
         padding:  60px $padding;
+        @media(max-width:600px){
+            padding: 22px;
+            flex: 0;
+        }
         &_result{
             display: grid;
             grid-template-columns: 1fr 310px;
@@ -208,7 +212,7 @@ $innerPadding:10px;
         grid-gap: 30px 40px;
         @media (max-width:600px) {
             grid-template-columns: 1fr;
-            padding: 22px;
+            
         }
 
         
