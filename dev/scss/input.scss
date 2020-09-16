@@ -176,7 +176,7 @@ $innerPadding:10px;
         @media (max-width:600px){  
             font-size: 22px;
             padding-left: 22px;
-            padding-right: 22px;
+            padding-right: 40px;
         }
     }
     &__body{
@@ -184,7 +184,6 @@ $innerPadding:10px;
         padding:  60px $padding;
         @media(max-width:600px){
             padding: 22px;
-            flex: 0;
         }
         &_result{
             display: grid;

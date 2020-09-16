@@ -208,7 +208,6 @@ body {
 @media (max-width: 600px) {
   .form__body {
     padding: 22px;
-    flex: 0;
   }
 }
 .form__body_result {
