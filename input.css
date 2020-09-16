@@ -198,7 +198,7 @@ body {
   .form__header {
     font-size: 22px;
     padding-left: 22px;
-    padding-right: 22px;
+    padding-right: 40px;
   }
 }
 .form__body {
