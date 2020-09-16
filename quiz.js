@@ -11,7 +11,8 @@ function sendRequest() {
 
     xhr.onload = function () {
         console.log(xhr.response);
-        if(xhr.status==200) showSuccessPage();
+        // if(xhr.status==200) 
+        showSuccessPage();
     }
 }
 

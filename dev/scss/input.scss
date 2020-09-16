@@ -15,6 +15,9 @@ $innerPadding:10px;
 }
 @mixin field($height) {
     display: block;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
     height: $height;
     line-height: $height;
     font-size: 14px;
@@ -106,9 +109,6 @@ $innerPadding:10px;
 .button {
     @include field(55px);
     @extend %card;
-    appearance: none;
-    -moz-appearance: none;
-    -webkit-appearance: none;
     border: none;
     text-align: center;
     background: $accentColor;
@@ -181,19 +181,9 @@ $innerPadding:10px;
     }
     &__body{
         flex:1;
-    }
-    &__answers{
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-gap: 30px 40px;
         padding:  60px $padding;
-
-        @media (max-width:600px) {
-            grid-template-columns: 1fr;
-            padding: 22px;
-        }
-
         &_result{
+            display: grid;
             grid-template-columns: 1fr 310px;
             padding-top: 24px;
             padding-bottom: 31px;
@@ -211,6 +201,17 @@ $innerPadding:10px;
             align-items: center;
             text-align: center;
         }
+    }
+    &__answers{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 30px 40px;
+        @media (max-width:600px) {
+            grid-template-columns: 1fr;
+            padding: 22px;
+        }
+
+        
     }
     &__footer{
         /*position: absolute;
