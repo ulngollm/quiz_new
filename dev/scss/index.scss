@@ -22,8 +22,9 @@ body{
         flex: 0 1 840px;
         height: 500px;
         @media (max-width:600px){
-            margin: 20px;
-            height: calc(100vh - 40px);
+            // margin: 20px;
+            // height: calc(100vh - 40px);
+            height: 100%;
         }
     }
     &__close{

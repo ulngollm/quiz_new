@@ -27,8 +27,7 @@ body {
 }
 @media (max-width: 600px) {
   .quiz__modal {
-    margin: 20px;
-    height: calc(100vh - 40px);
+    height: 100%;
   }
 }
 .quiz__close {
@@ -67,4 +66,4 @@ body {
   }
 }
 
-
+/*# sourceMappingURL=index.css.map */
