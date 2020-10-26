@@ -169,6 +169,9 @@ $innerPadding:10px;
     $padding:40px;
     display: flex;
     flex-direction: column;
+    @media (max-width:600px){
+        border-radius: 0;
+    }
     &__header{
         padding: 23px $padding 18px;
         border-bottom: 1px solid $lightGrey;
@@ -260,9 +263,7 @@ $innerPadding:10px;
     // &__message{
     //     padding-top: 12px;
     // }
-    &_hidden{
-        display: none;
-    }
+    
     &__error{
         color: #EF6262;
         line-height: 21px;
@@ -273,7 +274,15 @@ $innerPadding:10px;
             opacity: 1;
         }
     }
-    
+    &_result{
+        @media (max-width:600px){
+            display: block;
+        }  
+    }
+    &_hidden{
+        display: none;
+    }
+
 
 }
 .message{
