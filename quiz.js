@@ -8,11 +8,13 @@ function sendRequest() {
     xhr.open('POST', 'quiz.php');
     xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
     xhr.send(request);
+	console.log(request);
 
     xhr.onload = function () {
         console.log(xhr.response);
-        // if(xhr.status==200) 
-        showSuccessPage();
+        if(xhr.status==200) 
+            showResultPage(xhr.response);
+        else showResultPage('error');
     }
 }
 
@@ -36,7 +38,8 @@ function goFinalPage() {
     document.querySelector('.form_first').classList.add('form_hidden');
     document.querySelector('.form_result').classList.remove('form_hidden');
 }
-function showSuccessPage(){
+function showResultPage(status){
+    if(status != 'OK') document.querySelector('.form_success .message').innerHTML = 'К сожалению, отправка формы не удалась &#128532;. <br> Пожалуйства, оставьте нам заявку через форму обратной связи &#128591;';
     document.querySelector('.form_result').classList.add('form_hidden');
     document.querySelector('.form_success').classList.remove('form_hidden');
 }
@@ -100,10 +103,6 @@ document.querySelector('input[name="other"]').addEventListener('input', function
 })
 document.querySelector('form.form__answers').addEventListener('change', checkValid);
 
-var phoneMask = IMask(
-    document.querySelector('.input_icon-phone'), {
-    mask: '+{7} (000) 000-00-00'
-});
 
 var form = document.querySelector('form.form__feedback');
 form.addEventListener('submit', function (e) {
@@ -115,5 +114,10 @@ form.addEventListener('submit', function (e) {
         quizAnswers.push(ans);
     }
     sendRequest();
-
+    
 })
+
+var phoneMask = IMask(
+    document.querySelector('.input_icon-phone'), {
+    mask: '+{7} (000) 000-00-00'
+});
