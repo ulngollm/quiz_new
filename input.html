@@ -6,19 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="input.css">
-    <script defer src="quiz.js"></script>
-    <script src="str.js"></script>
-    <script defer src="https://unpkg.com/imask"></script>
+    <script defer src="/quiz.js"></script>
+    <script src="/structure.js"></script>
 </head>
 
 <body>
 
     <div class="form form_first">
+        
+    </div>
+    <div class="form form_hidden form_result">
+
+    </div>
+    <div class="form form_success form_hidden">
+
+    </div>
+
+    <template id="defaultPage">
         <div class="form__header">
-            Какой у вас вид ?
+            <slot id="header"></slot>
         </div>
         <div class="form__body">
-            <form class="form__answers"></form>
+            <form class="form__answers">
+                <slot id="answers"></slot>
+            </form>
         </div>
         <div class="form__footer">
             <div class="message message_warning form__error">🚔 Виу-виу, кажется, вы что-то забыли выбрать.. </div>
@@ -27,8 +38,21 @@
                 <a href="#" class="button form__button form__button_next">Далее</a>
             </div>
         </div>
-    </div>
-    <div class="form form_hidden form_result">
+    </template>
+    <template id="field">
+        <label class="control">
+            <input type="radio" class="control__input" name="choose" value="${answer}" data-next="{index}" autocomplete="off" required>
+            <span class="control__label control__label_radio">${answer}</span>
+        </label>
+    </template>
+    <template id="textField">
+        <label class="control">
+            <input type="radio" class="control__input control__input_replacement" name="choose" autocomplete="off"
+                value="" required>
+            <input class="input" type="text" name="other" placeholder="Другое">
+        </label>
+    </template>
+    <template id="result">
         <div class="form__header">
             Готово!
         </div>
@@ -42,7 +66,7 @@
                         placeholder="+7 (___) ___-__-__" inputmode="tel" required>
                 </label>
                 <label class="label form__label"><span class="label__text">Введите имя</span>
-                    <input type="text" name="Имя"  class="input input_icon input_icon-name" placeholder="Имя" required>
+                    <input type="text" name="Имя" class="input input_icon input_icon-name" placeholder="Имя" required>
                 </label>
                 <label class="label form__label"><span class="label__text">Введите e-mail</span>
                     <input type="email" name="E-mail" class="input input_icon input_icon-mail"
@@ -56,15 +80,16 @@
                 </label>
             </form>
         </div>
-    </div>
-    <div class="form form_success form_hidden">
+    </template>
+    <template id="success">
         <div class="form__body form__body_centered">
             <div class="message form__message">
                 Спасибо!👏<br>
                 Благодарим за ответы! Мы свяжемся с вами в ближайшее время.
             </div>
         </div>
-    </div>
+    </template>
+
 </body>
 
 </html>

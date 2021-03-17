@@ -1,119 +1,210 @@
-var quizAnswers = [];
-var currentStep = 0;
+class Template {
+    param = {
+        questionBlock: ".form__header",
+        answerBlock: ".form__answers",
+        errorBlock: "form__error",
+        resultPageClass: "form_result",
+        successPageClass: "form_success",
+        successMessage: ".form__message"
+    }
+    templates = {
+        input: null,
+        textField: null,
+        resultPage: null,
+        successPage: null
+    }
+    resultMessage = {
+        success: "Спасибо!👏<br> Благодарим за ответы! Мы свяжемся с вами в ближайшее время.",
+        error: "Ошибка отправки формы"
+    }
+    page = {
+        wrapper: null,
+        header: null,
+        body: null
+    }
+    constructor() {
+        this.page.wrapper = document.querySelector('.form');
+        this.templates.page = this.getTemplate('defaultPage');
+        this.templates.input = this.getTemplate('field');
+        this.templates.textField = this.getTemplate('textField');
+        this.templates.resultPage = this.getTemplate('result');
+        this.templates.successPage = this.getTemplate('success');
+
+        this.init();
+
+    }
+    init() {
+        this.page.wrapper.append(this.templates.page);
+        this.page.header = this.page.wrapper.querySelector(this.param.questionBlock);
+        this.page.body = this.page.wrapper.querySelector(this.param.answerBlock);
+    }
+    getTemplate(templateId) {
+        return document.querySelector(`#${templateId}`).content.cloneNode(true);
+    }
+    clearTemplate() {
+        this.page.wrapper.innerHTML = "";
+    }
+    clearPage() {
+        this.page.header.innerHTML = "";
+        this.page.body.innerHTML = "";
+    }
+    getAnswerPage(step) {
+        this.setHeader(step.question);
+
+        step.answers.forEach((element, index) => {
+            let field = this.getInput(element, index);
+            this.setBody(field);
+        });
+    }
+    updatePage(step) {
+        this.clearPage();
+        this.getAnswerPage(step);
+    }
+    getFinalPage() {
+        console.log('ehfehf');
+        this.clearTemplate();
+        this.page.wrapper.classList.add(this.param.resultPageClass);
+        this.page.wrapper.append(this.templates.resultPage);
+    }
+    showSuccessPage(error = false) {
+        this.clearTemplate();
+        let successPage = this.templates.successPage;
+        successPage.querySelector(this.param.successMessage).innerHTML = (error) ? this.resultMessage.error : this.resultMessage.success;
+        this.page.wrapper.classList.add(this.successPageClass);
+        this.page.wrapper.append(this.templates.successPage);
+    }
+    getInput(answerData, index) {
+        let field = this.getTemplate('field');
+        let input = field.querySelector('input');
+        input.value = index;
+        input.setAttribute('data-next', answerData.next)
+        field.querySelector('.control__label').innerText = answerData.text;
+        return field;
+
+    }
+    setHeader(text) {
+        this.page.header.innerText = text;
+    }
+    setBody(elem) {
+        this.page.body.append(elem);
+    }
+}
+class Navigation {
+    static currentStep = 0;
+    static stepCount = 0;
+    static nextStep() {
+        if (this.currentStep < this.stepCount)
+            this.currentStep++;
+    }
+    static prevStep() {
+        if (this.currentStep > 0)
+            this.currentStep--;
+    }
+    static init(stepCount) {
+        this.stepCount = stepCount - 1;
+        /* document.querySelector('.form__button_next').addEventListener('click', ()=>this.nextStep());
+        document.querySelector('.form__button_prev').addEventListener('click', ()=>this.prevStep()); */
+    }
+
+}
+class Data {
+    static data = [];
+    static getCurrentStepData() {
+        let step = Navigation.currentStep;
+        return this.getStepData(step);
+    }
+    static getStepData(index) {
+        return this.data[index];
+    }
+    static init(data) {
+        this.data = data;
+    }
+
+}
+
+function QuizAnswer(questionText, answerText) {
+    this.question = questionText;
+    this.answer = answerText;
+}
+class Answers {
+    constructor() {
+        this.history = [];
+        this.index = 0;
+    }
+    addAnswer(question, answer) {
+        let newAnswer = {
+            question: question,
+            answer: answer
+        };
+        this.history.push(newAnswer)
+    }
+
+}
+class FormController {
+    constructor() {
+        this.form = document.querySelector('form');
+        this.init();
+    }
+    init() {
+        this.form.addEventListener('change', () =>
+            this.showError(false))
+    }
+    isValidStep() {
+        let hasAnswer = this.form.checkValidity();
+        return hasAnswer;
+    }
+    showError(notValid = true) {
+        let errorBlock = document.querySelector(".form__error");
+        console.log(errorBlock);
+        if (notValid)
+            errorBlock.classList.add(`form__error_active`);
+        else errorBlock.classList.remove(`form__error_active`);
+
+    }
+    getAnswer() {
+        return Number(this.form.querySelector('input:checked').value);
+    }
+    getNextStepIndex() {
+        return Number(this.form.querySelector('input:checked').dataset.next);
+    }
+  
 
 
-function sendRequest() {
-    let xhr = new XMLHttpRequest();
-    let request = JSON.stringify(quizAnswers);
-    xhr.open('POST', 'quiz.php');
-    xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-    xhr.send(request);
 
-    xhr.onload = function () {
-        console.log(xhr.response);
-        // if(xhr.status==200) 
-        showSuccessPage();
+}
+class Quiz {
+    constructor(data) {
+        Navigation.init(data.length);
+        Data.init(data);
+        this.answer = new Answers();
+        this.template = new Template();
+        this.formController = new FormController();
+        this.init();
+    }
+    init() {
+        this.template.getAnswerPage(Data.getCurrentStepData());
+        document.querySelector('.form__button_next').addEventListener('click', () => this.getNextPage());
+        document.querySelector('.form__button_prev').addEventListener('click', () => this.getPrevPage());
+    }
+
+    getNextPage() {
+        if (this.formController.isValidStep()) { //или || this.answer.history[this.answer.index + 1]
+            let nextStep = this.formController.getNextStepIndex();
+            this.answer.addAnswer(Navigation.currentStep, this.formController.getAnswer());
+            Navigation.currentStep = nextStep;
+            this.answer.index++;
+            if (nextStep)
+                this.template.updatePage(Data.getCurrentStepData());
+            else this.template.getFinalPage();
+        } else this.formController.showError();
+    }
+
+    getPrevPage() {
+        this.answer.index--;
+        let step = this.answer.history[this.answer.index].step;
+        this.template.updatePage(Data.getStepData(step));
     }
 }
 
 
-//записываем след пользователя
-
-function QuizAnswer(question, answer) {
-    this.step = currentStep;
-    this.question = question;
-    this.answer = answer;
-};
-
-function addAnswer() {
-    let question = document.querySelector('.form__header').innerText;
-    let answer = (document.querySelector('input:checked') || document.querySelector('input[type="text"]')).value;
-    let newAnswer = new QuizAnswer(question, answer);
-    quizAnswers.push(newAnswer);
-}
-
-function goFinalPage() {
-    document.querySelector('.form_first').classList.add('form_hidden');
-    document.querySelector('.form_result').classList.remove('form_hidden');
-}
-function showSuccessPage(){
-    document.querySelector('.form_result').classList.add('form_hidden');
-    document.querySelector('.form_success').classList.remove('form_hidden');
-}
-
-function initQuiz() {
-    showError(false)
-    let step = quiz[currentStep];
-    document.querySelector('.form__header').innerText = step['question'];
-    document.querySelector('.form__answers').innerHTML = '';
-    for (answer in step['answers']) {
-        let elem = `<label class="control"><input type="radio" class="control__input" name="choose" value="${answer}" autocomplete="off" required><span class="control__label control__label_radio">${answer}</span></label>`;
-        document.querySelector('.form__answers').insertAdjacentHTML('beforeend', elem);
-    }
-    if (step['textField']) {
-        let input = '<label class="control"><input type="radio" class="control__input control__input_replacement" name="choose" autocomplete="off" value="" required><input class="input" type="text" name="other" placeholder="Другое"></label>';
-        document.querySelector('.form__answers').insertAdjacentHTML('beforeend', input);
-    }
-}
-
-function checkValid(){
-    let hasAnswer = document.querySelector('form.form__answers').checkValidity();
-    hasAnswer? showError(false): showError(true);
-    return hasAnswer;
-}
-
-function nextStep() {
-    if (checkValid()) {
-        let answer = document.querySelector('input[type="radio"]:checked').value;
-        addAnswer();
-        currentStep = quiz[currentStep]['answers'][answer] || quiz[currentStep]['textField'];
-        if (currentStep != "end") initQuiz();
-        else goFinalPage();
-    }
-
-}
-
-function showError(isError){
-    let err = document.querySelector('.form__error');
-    isError? err.classList.add('form__error_active') : err.classList.remove('form__error_active');
-}
-
-function prevStep() {
-    if (currentStep > 0) {
-        let step = quizAnswers.length - 1;
-        currentStep = quizAnswers[step]['step'];
-        quizAnswers.splice(step, 1);
-        initQuiz();
-    }
-}
-
-initQuiz();
-
-
-document.querySelector('.form__button_next').addEventListener('click', nextStep);
-document.querySelector('.form__button_prev').addEventListener('click', prevStep);
-document.querySelector('input[name="other"]').addEventListener('focus', function(){
-    document.querySelector('.control__input_replacement').checked = true;
-})
-document.querySelector('input[name="other"]').addEventListener('input', function(e){
-    document.querySelector('.control__input_replacement').value = e.currentTarget.value;
-})
-document.querySelector('form.form__answers').addEventListener('change', checkValid);
-
-var phoneMask = IMask(
-    document.querySelector('.input_icon-phone'), {
-    mask: '+{7} (000) 000-00-00'
-});
-
-var form = document.querySelector('form.form__feedback');
-form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    console.log('Отправить');
-    let formData = new FormData(form);
-    for (let [name, value] of formData) {
-        ans = new QuizAnswer(name, value)
-        quizAnswers.push(ans);
-    }
-    sendRequest();
-
-})
+let quiz = new Quiz(step);

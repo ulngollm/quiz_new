@@ -3,6 +3,7 @@ ini_set('error_reporting','On');
 error_reporting(E_ALL);
 
 $json = file_get_contents("php://input");
+file_put_contents('data.json', $json);
 $json = strip_tags($json);
 $data = json_decode($json);
 
