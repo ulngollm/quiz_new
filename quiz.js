@@ -119,6 +119,15 @@ class Data {
     static init(data) {
         this.data = data;
     }
+    static getResultsList(answersList) {
+        let result = [];
+        answersList.forEach(function (value, index) {
+            let questionData = Data.getStepData(value.question);
+            result[index] = new QuizAnswer(questionData.question, questionData.answers[value.answer].text)
+        })
+        return result;
+
+    }
 
 }
 
@@ -167,7 +176,30 @@ class FormController {
     getNextStepIndex() {
         return Number(this.form.querySelector('input:checked').dataset.next);
     }
-  
+    static getUserData(e) {
+        let jsonFormData = [];
+        let formData = new FormData(e.target);
+        for (let [name, value] of formData) {
+            value = new QuizAnswer(name, value)
+            jsonFormData.push(value);
+        }
+        return jsonFormData;
+    }
+    static sendRequest(answers, formData) {
+        let xhr = new XMLHttpRequest();
+        let data = answers.push(...formData);
+        let request = JSON.stringify(data);
+        xhr.open('POST', 'quiz.php');
+        xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+        xhr.send(request);
+        console.log(request);
+
+        xhr.onload = function () {
+            console.log(xhr.response);
+            if (xhr.status == 200)
+                return true;
+        }
+    }
 
 
 
@@ -205,6 +237,7 @@ class Quiz {
         this.template.updatePage(Data.getStepData(step));
     }
 }
+
 
 
 let quiz = new Quiz(step);
