@@ -176,18 +176,28 @@ class FormController {
     getNextStepIndex() {
         return Number(this.form.querySelector('input:checked').dataset.next);
     }
-    static getUserData(e) {
+    static getUserData(form) {
         let jsonFormData = [];
-        let formData = new FormData(e.target);
+        let formData = new FormData(form);
         for (let [name, value] of formData) {
             value = new QuizAnswer(name, value)
             jsonFormData.push(value);
         }
         return jsonFormData;
     }
-    static sendRequest(answers, formData) {
+    static submitFeedbackHandler(e, answers){
+        console.log(e);
+        e.preventDefault();
+        let jsonFormData = this.getUserData(e.target);
+        let answerData = Data.getResultsList(answers);
+        console.log(jsonFormData);
+        let data = jsonFormData.concat(answerData); 
+        console.log(data);
+        this.sendRequest(data);
+    }
+    static sendRequest(data) {
+        //переписать на fetch
         let xhr = new XMLHttpRequest();
-        let data = answers.push(...formData);
         let request = JSON.stringify(data);
         xhr.open('POST', 'quiz.php');
         xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
@@ -227,7 +237,7 @@ class Quiz {
             this.answer.index++;
             if (nextStep)
                 this.template.updatePage(Data.getCurrentStepData());
-            else this.template.getFinalPage();
+            else this.getFinalPage();
         } else this.formController.showError();
     }
 
@@ -235,6 +245,11 @@ class Quiz {
         this.answer.index--;
         let step = this.answer.history[this.answer.index].step;
         this.template.updatePage(Data.getStepData(step));
+    }
+    getFinalPage(){
+        this.template.getFinalPage();
+        let answers = this.answer.history;
+        document.forms.feedback.addEventListener('submit', (e)=>FormController.submitFeedbackHandler(e, answers))
     }
 }
 
