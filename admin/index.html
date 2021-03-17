@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/input.css">
+    <script defer src="script.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <form class="form__feedback" id="question" action="">
+
+            <div class="question">
+                <span class="question__remove" onclick="deleteQuestion(this)">&#10006;</span>
+                <div class="quiestion__text">
+                    <label for="" class="label form__label">
+                        <span class="label__text">Вопрос</span>
+                        <input type="text" name='question' class="input">
+                    </label>
+                </div>
+
+                <div class="answer__wrapper">
+                    <div class="answer">
+                        <div class="row">
+                            <p>Ответы</p>
+                            <p>Следующий вопрос</p>
+                            <p>Удалить</p>
+                        </div>
+                        <div class="row answer__item">
+                            <input type="text" name='answer'>
+                            <input type="text" name='next'>
+                            <span class="button js-remove" onclick="deleteAnswer(this)"></span>
+                        </div>
+
+                    </div>
+                    <span class="button js-anw" onclick="addAnswer(this)">Добавить ответ</span>
+                </div>
+            </div>
+        </form>
+        <span class="button js-add">Добавить вопрос</span>
+        <input form="question" type="submit" value="Сохранить и отправить" class="button">
+    </div>
+
+    <template id="new_question">
+        <div class="question">
+            <span class="question__remove" onclick="deleteQuestion(this)">&#10006;</span>
+            <div class="quiestion__text">
+                <label for="" class="label form__label">
+                    <span class="label__text">Вопрос</span>
+                    <input type="text" class="input" name='question'>
+                </label>
+            </div>
+
+            <div class="answer__wrapper">
+                <div class="answer">
+                    <div class="row">
+                        <p>Ответы</p>
+                        <p>Следующий вопрос</p>
+                        <p>Удалить</p>
+                    </div>
+                    <div class="row answer__item">
+                        <input type="text" name="answer">
+                        <input type="text" name='next'>
+                        <span class="button js-remove" onclick="deleteAnswer(this)"></span>
+                    </div>
+                </div>
+                <span class="button js-anw" onclick="addAnswer(this)">Добавить ответ</span>
+            </div>
+        </div>
+    </template>
+    <template id="new_answer">
+        <div class="row answer__item">
+            <input type="text" name="answer">
+            <input type="text" name='next'>
+            <span class="button js-remove" onclick="deleteAnswer(this)"></span>
+        </div>
+    </template>
+
+</body>
+
+</html>
