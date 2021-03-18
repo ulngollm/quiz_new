@@ -20,5 +20,4 @@ foreach ($data as $key) {
 }
 
 $sendMail = mail($to,$subject, $message, $headers);
-echo $sendMail? 'Успешно':"Ошибка"; 
-    
+echo $sendMail? "OK":"error";  
