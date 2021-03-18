@@ -12,8 +12,9 @@ function showQuiz(){
     document.body.classList.add('overlay');
 }
 function hideQuiz(){
-    let quiz = document.querySelector('.quiz').classList.add('quiz_removed');
-    setTimeout(()=>document.querySelector('.quiz').remove(), 200);
+    let quiz = document.querySelector('.quiz');
+    quiz.classList.add('quiz_removed');
+    setTimeout(()=>quiz.remove(), 200);
     document.body.classList.remove('overlay');
 }
 

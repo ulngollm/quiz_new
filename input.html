@@ -1,19 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="input.css">
-    <script defer src="/quiz.js"></script>
-    <script src="/structure.js"></script>
+<html lang="ru">
+    
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Quiz</title>
+        <link rel="stylesheet" href="input.css">
+        <script defer src="/quiz.js"></script>
 </head>
 
 <body>
 
     <div class="form form_first">
-        
+
     </div>
     <div class="form form_hidden form_result">
 
@@ -41,7 +40,8 @@
     </template>
     <template id="field">
         <label class="control">
-            <input type="radio" class="control__input" name="choose" value="${answer}" data-next="{index}" autocomplete="off" required>
+            <input type="radio" class="control__input" name="choose" value="${answer}" data-next="{index}"
+                autocomplete="off" required>
             <span class="control__label control__label_radio">${answer}</span>
         </label>
     </template>
@@ -83,13 +83,11 @@
     </template>
     <template id="success">
         <div class="form__body form__body_centered">
-            <div class="message form__message">
-                Спасибо!👏<br>
-                Благодарим за ответы! Мы свяжемся с вами в ближайшее время.
+            <div class="message form__message">${message}
             </div>
         </div>
     </template>
-
+    
 </body>
 
 </html>
