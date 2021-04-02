@@ -28,11 +28,14 @@ class Quiz {
         Navigation.currentStep,
         this.formController.getAnswer()
       );
-      Navigation.currentStep = nextStep;
       this.answer.index++;
-      if (nextStep) this.template.updatePage(Data.getCurrentStepData());
-      else this.getFinalPage();
-    } else this.formController.showError();
+      if (nextStep && nextStep < Navigation.stepCount) {
+        Navigation.currentStep = nextStep;
+        this.template.updatePage(Data.getCurrentStepData());
+      } else
+        this.getFinalPage();
+    } else
+      this.formController.showError();
   }
 
   getPrevPage() {
@@ -49,4 +52,3 @@ class Quiz {
     );
   }
 }
-let quiz = new Quiz('/structure.json');
