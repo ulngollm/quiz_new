@@ -5,11 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz</title>
-    <script defer src="import.js"></script>
+    <link rel="stylesheet" href="main.css">
+    <script defer src="main.min.js"></script>
 </head>
 
 <body>
-    <button>ПРОйти</button>
+    <button>Пройти тест</button>
+    <div class="quiz">
+        <div class="quiz__modal">
+            <a href="#" class="quiz__close">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="16.2635" width="4" height="23" rx="2" transform="rotate(45 16.2635 0)" fill="#C4C4C4" />
+                    <rect x="19.2635" y="16.2635" width="4" height="23" rx="2" transform="rotate(135 19.2635 16.2635)" fill="#C4C4C4" /></svg> </a> 
+                    <div class="quiz__body"></div> 
+            </div>
+    </div>
 </body>
 
 </html>
