@@ -1,5 +1,6 @@
 class Data {
     static data = [];
+    static totalSum = 0;
     static getCurrentStepData() {
       let step = Navigation.currentStep;
       return this.getStepData(step);
@@ -16,19 +17,23 @@ class Data {
       let response = await fetch(url);
       return await response.json();
     }
-    static getResultsList(answersList) {
-      let result = [];
-      let sum = 0;
-      answersList.forEach(function (item, index) {
+    static getTotalSum(historyList){
+      historyList.forEach((item, index)=>{
         let questionData = Data.getStepData(item.question);
-        sum += questionData.answers[item.answer].value,
-        result[index] = Answers.createAnswer(
+        this.totalSum += questionData.answers[item.answer].value;
+      })
+      console.log(this.totalSum);
+    }
+    static prepareQuizResult(historyList) {
+      let result = [];
+      historyList.forEach(function (item, answerIndex) {
+        let questionData = Data.getStepData(item.question);
+        result[answerIndex] = Answers.createAnswer(
           questionData.question,
           questionData.answers[item.answer].text
         );
       });
-      result.push(Answers.createAnswer("Сумма", sum));
-      console.log(result);
+      if(this.totalSum) result.pop(Answers.createAnswer("Сумма", this.totalSum));
       return result;
     }
   }

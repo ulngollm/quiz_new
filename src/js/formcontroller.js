@@ -12,7 +12,6 @@ class FormController {
     }
     showError(notValid = true) {
       let errorBlock = document.querySelector(".form__error");
-      console.log(errorBlock);
       if (notValid) errorBlock.classList.add(`form__error_active`);
       else errorBlock.classList.remove(`form__error_active`);
     }
@@ -31,11 +30,10 @@ class FormController {
       }
       return jsonFormData;
     }
-    submitFeedbackHandler(e, answers) {
+    submitFeedbackHandler(e, answerData) {
       e.preventDefault();
       let jsonFormData = this.getUserData(e.target);
-      let answerData = Data.getResultsList(answers);
-      console.log(jsonFormData);
+      // console.log(jsonFormData);
       let data = jsonFormData.concat(answerData);
       this.sendRequest(data);
     }

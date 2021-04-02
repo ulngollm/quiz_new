@@ -50,10 +50,10 @@ class Template {
       this.page.header.innerHTML = "";
       this.page.body.innerHTML = "";
     }
-    getAnswerPage(step) {
-      this.setHeader(step.question);
+    getAnswerPage(stepJson) {
+      this.setHeader(stepJson.question);
   
-      step.answers.forEach((element, index) => {
+      stepJson.answers.forEach((element, index) => {
         let field = this.getInput(element, index);
         this.setBody(field);
       });
@@ -62,10 +62,11 @@ class Template {
       this.clearPage();
       this.getAnswerPage(step);
     }
-    getFinalPage() {
+    getFinalPage(totalSum = null) {
       this.clearTemplate();
       this.page.wrapper.classList.add(this.param.resultPageClass);
       this.page.wrapper.append(this.templates.resultPage);
+      if(totalSum) this.page.wrapper.querySelector('.price').innerText = totalSum;
     }
     showSuccessPage(success = true) {
       this.clearTemplate();
