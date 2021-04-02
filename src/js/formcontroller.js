@@ -26,7 +26,7 @@ class FormController {
       let jsonFormData = [];
       let formData = new FormData(form);
       for (let [name, value] of formData) {
-        value = new QuizAnswer(name, value);
+        value = Answers.createAnswer(name, value);
         jsonFormData.push(value);
       }
       return jsonFormData;

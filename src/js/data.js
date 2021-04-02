@@ -18,13 +18,17 @@ class Data {
     }
     static getResultsList(answersList) {
       let result = [];
-      answersList.forEach(function (value, index) {
-        let questionData = Data.getStepData(value.question);
+      let sum = 0;
+      answersList.forEach(function (item, index) {
+        let questionData = Data.getStepData(item.question);
+        sum += questionData.answers[item.answer].value,
         result[index] = Answers.createAnswer(
           questionData.question,
-          questionData.answers[value.answer].text
+          questionData.answers[item.answer].text
         );
       });
+      result.push(Answers.createAnswer("Сумма", sum));
+      console.log(result);
       return result;
     }
   }
