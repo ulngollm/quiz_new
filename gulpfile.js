@@ -18,7 +18,7 @@ export const js = function(){
     .pipe(dest('build'));
 }
 const docs = function(){
-    return src(['src/docs/*','src/backend/structure.json'])
+    return src(['src/docs/*','src/backend/*.json'])
     .pipe(dest('build'));
 }
 export const styles = function(){
