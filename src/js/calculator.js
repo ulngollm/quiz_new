@@ -1,3 +1,3 @@
-class Calculator{
-    static totalSum;
-  }
+class Calculator {
+  static totalSum;
+}

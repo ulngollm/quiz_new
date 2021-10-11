@@ -1,17 +1,27 @@
-class Quiz {
-  constructor(data) {
-    Data.init(data);
-    Navigation.init(Data.data.length);
+import Answers from "./answers.js";
+import FormController from "./formcontroller.js";
+import Data from "./data.js";
+import Template from "./template.js";
+import Navigation from "./navigation.js";
+export default class Quiz {
+  constructor() {
     this.isCalculateResult = true;
     this.template = new Template();
     this.formController = new FormController();
-    this.init();
   }
-  init() {
+  async init(data) {
+    let res = await Data.init(data);
+    if(res) Navigation.init(res.length);
     this.template.getAnswerPage(Data.getCurrentStepData());
-    document.querySelector(".form__button_next").addEventListener("click", () => this.getNextPage());
-    document.querySelector(".form__button_prev").addEventListener("click", () => this.getPrevPage());
-    window.addEventListener("userDataSend", (e) =>this.template.showSuccessPage(e.detail));
+    document
+      .querySelector(".form__button_next")
+      .addEventListener("click", () => this.getNextPage());
+    document
+      .querySelector(".form__button_prev")
+      .addEventListener("click", () => this.getPrevPage());
+    window.addEventListener("userDataSend", (e) =>
+      this.template.showSuccessPage(e.detail)
+    );
   }
 
   getNextPage() {
@@ -25,10 +35,8 @@ class Quiz {
       if (nextStep && nextStep < Navigation.stepCount) {
         Navigation.currentStep = nextStep;
         this.template.updatePage(Data.getCurrentStepData());
-      } else
-        this.getFinalPage();
-    } else
-      this.formController.showError();
+      } else this.getFinalPage();
+    } else this.formController.showError();
   }
 
   getPrevPage() {
@@ -40,7 +48,7 @@ class Quiz {
 
   getFinalPage() {
     let answers = Answers.history;
-    if(this.isCalculateResult) Data.getTotalSum(answers);
+    if (this.isCalculateResult) Data.getTotalSum(answers);
     this.template.getFinalPage(Data.totalSum);
     let quizResult = Data.prepareQuizResult(answers);
     document.forms.feedback.addEventListener("submit", (e) =>

@@ -1,19 +1,27 @@
-const { src, dest, series, parallel, watch } = require("gulp");
-const concat = require('gulp-concat');
-const browserSync = require("browser-sync").create();
-const sass = require('gulp-sass');
-sass.compiler = require('node-sass');
+import gulp from "gulp";
+const { src, dest, series, parallel, watch } = gulp;
+import {rollup} from 'gulp-rollup-2';
+import browserSync from "browser-sync";
+import sass from 'gulp-dart-sass';
+import { nodeResolve } from "@rollup/plugin-node-resolve";
 
-const js = function(){
-    return src('src/js/*.js')
-    .pipe(concat('main.min.js'))
+export const js = function(){
+    return src('src/js/app.js')
+    .pipe(rollup({
+        input: "src/js/app.js",
+        output: {
+            file: "build/app.js",
+            format: 'es',
+        },
+        plugins: [nodeResolve()],
+    }))
     .pipe(dest('build'));
 }
 const docs = function(){
-    return src('src/docs/*')
+    return src(['src/docs/*','src/backend/structure.json'])
     .pipe(dest('build'));
 }
-const styles = function(){
+export const styles = function(){
     return src('src/scss/main.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(dest('build'));
@@ -26,14 +34,12 @@ const watcher = function(){
     watch('build/**', { delay: 1000 }, browserSync.reload);
 
 }
-const server = function(){
+const liveServer = function(){
     browserSync.init({
         server: {
             baseDir: "./build/"
         }
     });
 }
-exports.server = parallel(server, watcher);
-exports.prepare = series(js);
-exports.styles = series(styles);
-exports.build = parallel(js, docs, styles);
+export const server = parallel(liveServer, watcher);
+export const build = parallel(js, docs, styles);

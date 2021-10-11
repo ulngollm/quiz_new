@@ -1,4 +1,4 @@
-class Answers {
+export default class Answers {
   static history = [];
   static currentQuestionIndex = 0;
 

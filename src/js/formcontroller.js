@@ -1,4 +1,5 @@
-class FormController {
+import Answers from "./answers.js";
+export default class FormController {
     constructor() {
       this.form = document.querySelector("form");
       this.init();

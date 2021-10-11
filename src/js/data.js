@@ -1,4 +1,6 @@
-class Data {
+import Answers from './answers.js';
+import Navigation from './navigation.js';
+export default class Data {
     static data = [];
     static totalSum = 0;
     static getCurrentStepData() {
@@ -9,9 +11,12 @@ class Data {
       return this.data[index];
     }
     static async init(data) {
-      if (typeof data == "string") {
-        this.data = await this.getData(data);
-      } else this.data = data;
+      let {url, list} = data;
+      if(url){
+        this.data = await Data.getData(url);
+        // console.log({data: this.data});
+        return this.data;
+      } else this.data = list;
     }
     static async getData(url) {
       let response = await fetch(url);

@@ -1,4 +1,4 @@
-class Template {
+export default class Template {
     param = {
       questionBlock: ".form__header",
       answerBlock: ".form__answers",

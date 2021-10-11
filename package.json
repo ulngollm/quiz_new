@@ -1,16 +1,42 @@
 {
   "devDependencies": {
+    "@rollup/plugin-node-resolve": "^13.0.5",
     "browser-sync": "^2.26.14",
     "gulp": "^4.0.2",
+    "gulp-better-rollup": "^4.0.1",
+    "gulp-best-rollup-2": "^5.0.3",
     "gulp-concat": "^2.6.1",
-    "gulp-sass": "^4.1.0",
-    "node-sass": "^5.0.0"
+    "gulp-dart-sass": "^1.0.2",
+    "gulp-rollup": "^2.17.0",
+    "gulp-rollup-2": "^1.3.1",
+    "rollup": "^2.58.0"
   },
   "scripts": {
-    "start": "npm run prepare && npm run server",
+    "start": "npm run build && npm run server",
     "prepare": "gulp prepare",
     "server": "gulp server",
     "build": "gulp build",
+    "prebuild": "rm -rf build",
     "styles": "gulp styles"
+  },
+  "name": "quiz",
+  "description": "1. Разместить файлы квиза на сервере.",
+  "version": "1.1.0",
+  "main": "gulpfile.js",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://ulngollm@bitbucket.org/ulngollm/quiz-latest.git"
+  },
+  "keywords": [
+    "vanilla-js"
+  ],
+  "author": "ulngollm",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://bitbucket.org/ulngollm/quiz-latest/issues"
+  },
+  "homepage": "https://bitbucket.org/ulngollm/quiz-latest#readme",
+  "dependencies": {
   }
 }
